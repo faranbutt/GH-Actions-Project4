@@ -1,8 +1,19 @@
 name: Reusable Workflow
-on: workflow_call
+on: 
+    workflow_call: 
+        inputs:
+          artifact-name:
+            description: The name of deployable artifact files
+            required: false
+            default: dist
+            type: string
 jobs:
     build-deploy:
         runs-on: ubuntu-latest
         steps:
+            - name: Download Build
+              uses: actions/download_artifact@v3
+              with:
+                name: ${{inputs.artifact-name}}
             - name: B&D code
               run: echo "Code is Builded and now Deploying...."
