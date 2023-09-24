@@ -15,5 +15,7 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                 name: ${{inputs.artifact-name}}
+            - name: See downloaded files
+              run: ls
             - name: B&D code
               run: echo "Code is Builded and now Deploying...."
