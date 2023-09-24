@@ -10,8 +10,14 @@ on:
         secrets:
           some-secret:
             required: false
+        outputs:
+          result:
+            description: The result of the deployment operation
+            value: ${{jobs.build-deploy.outputs.outcome}}
 jobs:
     build-deploy:
+        outputs:
+          outcome: ${{steps.set-result.outputs.step-result}}
         runs-on: ubuntu-latest
         steps:
             - name: Download Build
@@ -24,3 +30,6 @@ jobs:
               run: echo ${{secrets.some-secret}}
             - name: B&D code
               run: echo "Code is Builded and now Deploying...."
+            - name: Set result output
+              id: set-result
+              run: echo "::set-output name=step-result::success"
