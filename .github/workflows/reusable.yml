@@ -1,0 +1,8 @@
+name: Reusable Workflow
+on: workflow_call
+jobs:
+    build-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: B&D code
+              run: echo "Code is Builded and now Deploying...."
