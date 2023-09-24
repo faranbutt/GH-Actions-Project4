@@ -37,8 +37,8 @@ jobs:
         id: run-test
         run: npm run test
       - name: Upload test report
-        if: ${{steps.run-test == 'failure'}}
-        uses: actions/upload-artifact@v3
+        if: ${{failure() && steps.run-test == 'failure'}}
+        uses: actions/upload-artifact@v3W
         with:
           name: test-report
           path: test.json
